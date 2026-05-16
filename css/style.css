@@ -1,0 +1,432 @@
+/* スムーズスクロール */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 全体幅 */
+.wrap {
+  max-width: 1200px;
+  /* 最大幅を1200pxに制限する */
+  /* ブラウザ幅が1200px以下のときは100%幅になる */
+  margin: 0 auto;
+  /* 上下の余白0、左右はauto（自動）= 中央寄せ */
+  /* max-widthと組み合わせることで中央に配置される */
+}
+
+
+.header {
+  display: flex;
+  /* ヘッダーの中をFlexboxにする */
+  /* ロゴとナビを横並びにする */
+  justify-content: space-between;
+  /* 横方向：両端に配置する */
+  /* ロゴが左端・ナビが右端になる */
+  align-items: center;
+  /* 縦方向：中央に揃える */
+  /* ロゴとナビの高さを中央に揃える */
+  padding: 50px 50px;
+  /* 上下0・左右50pxの余白 */
+  height: 121px;
+  /* ヘッダーの高さ */
+  width: 100%;
+}
+/* headerのフォントサイズについて「世界を変えるチーズを作ろう」：48px
+    「チーズ職人養成学校「チーズアカデミーTOKYO」」：32px と仕様書記述あり*/
+
+.header-nav ul {
+  display: flex;
+}
+
+.header-nav a {
+  font-size: 21px;
+  padding: 0 25px;
+  /* はじめはpadding: 50px 25px;かと思ったが、すでにheaderで上下余白を指定しているのでこっちは0 50にしてみた */
+}
+
+/* メインビジュアル */
+/* .mainvisual → 背景画像・サイズ・レイアウトの責任 */
+/* ここに文字色の白を指定しても動作はするが、将来要素が増えたときのことを考慮してここには指定していない */
+.mainvisual {
+  background-image: url(../img/mainbg.png);
+  /* 背景画像を指定 */
+  /* cssフォルダから見て../で1つ上の階層に戻りimgフォルダを参照 */
+  /* /img/mainbg.pngで記述しても今回は動作したが環境に左右されるようなので今回は正式な記述を採用する */
+  background-size: cover;
+  /* 画像をエリア全体に覆うように拡大縮小する */
+  background-position: center;
+  /* 画像を中央に配置する */
+  height: 600px;
+  /* メインビジュアルの高さ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 中のテキストを縦横中央に配置する */
+}
+/* メインビジュアルテキスト */
+/* .mainvisual-text → テキストのスタイルの責任 */
+.mainvisual-text {
+  text-align: center;
+  /* インラインレベルコンテンツの水平方向の配置(↔vertical-align) */
+  color: white;
+  /* CSS継承が起きるので後述のmainvisual-titleやmainvisual-subでは色の指定は行わなくていいみたい */
+}
+
+.mainvisual-title {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+.mainvisual-sub {
+  font-size: 32px;
+}
+
+/* ABOUTセクション */
+.about {
+  background-color: #fafafa;
+  padding: 60px 0 30px 0;
+  /* 上・右・下・左 */
+  /* 上は60pxで良いが、下を30pxにして置くことで後のCOURSEの上30pxと合わせて60pxの余白を実装 */
+}
+
+.about-inner {
+  text-align: center;
+}
+
+.section-title {
+  font-size: 24px;
+  /* color: #ffd61a; */
+  margin-bottom: 30px;
+}
+
+.about .section-title {
+  color: #ffd61a;
+} /* ABOUTだけ黄色を指定 */
+/* 「.aboutの中にある.section-title」に適用する */
+/* これを「子孫セレクタ」と言う */
+
+.news .section-title {
+  color: #ffd61a;
+} /* NEWSだけ黄色を指定 後々忘れそうなので先に書いておくことにする*/
+
+.section-sub {
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+.about-text {
+  font-size: 16px;
+  margin-bottom: 80px;
+}
+
+.about-text-p {
+  margin-bottom: 40px;
+}
+
+.about-images {
+  display: flex;
+  justify-content: center;
+}
+
+.about-images img {
+  width: 25%;
+  /* 親要素（.about-images）の横幅を100%として1枚あたり25% × 4枚 = 100% */
+  /* つまり4枚がぴったり横並びで収まる */
+}
+/* .about-images img →「.about-imagesの中にあるimgタグ」に適用する */
+/* これも子孫セレクタ */
+
+/* COURSEセクション */
+.course {
+  padding: 30px 0;
+}
+
+.course-inner {
+  text-align: center;
+}
+
+.course-lead {
+  font-size: 16px;
+  margin-bottom: 60px;
+}
+
+/* ボックスのCSS。画像とテキストを横並びにする部分 */
+.course-box {
+  display: flex;
+  align-items: center;
+  background-color: #fafafa;
+}
+
+.course-box-img {
+  width: 50%;
+}
+
+.course-box-text {
+  width: 50%;
+  padding-left: 50px;
+  text-align: left;
+}
+
+.course-box-title {
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+/* ボックス2専用 */
+.course-box-reverse .course-box-text {
+  width: 430px;
+  /* 仕様書の指定：50px（余白）+ テキスト幅 = 480px */
+  /* width: 480pxでは意図しない表示になるため430pxに調整 */
+  /* 原因は要調査 */
+  padding-left: 0;
+  padding-right: 50px;
+  margin-left: auto;
+  text-align: left;
+}
+
+.course-box-p {
+  font-size: 13px;
+  /* 仕様書は16px指定だが、PDFイメージに合わせて13pxに調整 */
+}
+
+/* NEWSセクション */
+.news {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.news-list {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+.news-item {
+  width: 300px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.news-item:hover {
+  opacity: 0.7;
+  /* 要素の不透過度。不透過度は要素の裏にあるコンテンツが隠れる度合いであり、透過度の逆。 */
+}
+
+.news-date {
+  font-size: 14px;
+  margin: 30px 0 24px;
+  /* 日付は上に30px、下に24pxの余白指定あり */
+}
+
+.news-text {
+  font-size: 14px;
+  /* 仕様書は16px指定だが、PDFイメージに合わせて14pxに調整 */
+}
+
+.btn {
+  display: block;
+  width: 300px;
+  height: 60px;
+  font-size: 18px;
+  background-color: #ffd61a;
+  color: #ffffff;
+  line-height: 60px;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  opacity: 0.7;
+}
+
+/* ACCESSセクション */
+.access {
+  padding: 60px 0;
+  background-color: #fafafa;
+  text-align: center;
+}
+
+.access-map {
+  margin-bottom: 60px;
+}
+
+.access-map iframe {
+  width: 100%;
+  height: 400px;
+  /* 高さが指定されていなかったため400pxで暫定設定 */
+}
+
+.access-inner {
+  text-align: center;
+}
+
+.access-info {
+  display: inline-block;
+  text-align: left;
+  width: 640px;
+  /* 左右に余白を持たせて中央寄せ */
+  /* 親要素のtext-align:centerでinline-blockが中央に寄る */
+}
+
+.access-info dl {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.access-info dt {
+  width: 120px;
+  height: 50px;
+  padding-bottom: 30px;
+}
+
+.access-info dd {
+  width: calc(100% - 120px);
+  height: 50px;
+  padding-bottom: 30px;
+}
+
+/* CONTACTセクション */
+.contact {
+  padding-top: 60px;
+  text-align: center;
+}
+
+.contact .section-title {
+  margin-bottom: 30px;
+}
+
+.contact .section-sub {
+  margin-bottom: 60px;
+}
+
+.contact-inner {
+  display: inline-block;
+  text-align: center;
+}
+
+.section-lead-1 {
+  font-size: 16px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.section-lead-2 {
+  font-size: 16px;
+  margin-bottom: 70px;
+  text-align: center;
+}
+
+.contact-form {
+  width: 640px;
+}
+
+.form-group {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid #bfbfbf;
+  border-bottom: 1px solid #bfbfbf;
+  padding: 0;
+  margin-bottom: -1px;
+}
+
+.form-label {
+  width: 240px;
+  font-size: 16px;
+  flex-shrink: 0;
+  border-right: 1px solid #bfbfbf;
+  padding: 16px;
+  /* display: flex; */
+  /* align-items: center; */
+  display: block;
+  line-height: 1.6;
+  text-align: left;
+}
+
+.form-input {
+  width: 328px;
+  height: 36px;
+  border: 1px solid #bfbfbf;
+  font-size: 16px;
+  padding: 0 8px;
+  /* margin: 8px; */
+  margin: auto 8px;
+}
+
+.form-select {
+  width: 328px;
+  height: 36px;
+  border: 1px solid #bfbfbf;
+  font-size: 16px;
+  margin: auto 8px; /* 上下auto・左右8px */
+  color: #808080;
+  /* 黒が美しくないと思ったので自己判断でグレー色に指定 */
+}
+
+.form-check-group {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-left: 16px;
+  margin: 8px;
+}
+
+.form-check-label {
+  display: flex;
+  align-items: center;
+}
+.form-textarea {
+  width: 328px;
+  height: 120px;
+  border: 1px solid #bfbfbf;
+  font-size: 16px;
+  padding: 10px;
+  margin: 8px;
+}
+
+.btn {
+  margin-top: 30px;
+  margin-bottom: 140px;
+  border: none;
+  cursor: pointer;
+}
+
+/* フッター */
+.footer {
+  background-color: #707070;
+  padding: 30px 0;
+  text-align: center;
+}
+
+.footer-copy {
+    color: #ffffff;
+    font-size: 14px;
+}
+
+/* ナビゲーションホバー */
+/* .header-nav a:hover { */
+  /* border-bottom: 2px solid #222222; */
+  /* 下線のデザインを左から右に流れるように変更した */
+/* } */
+
+.header-nav a {
+    font-size: 21px;
+    padding: 25px;
+    position: relative;
+}
+
+.header-nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    /* left: 50%; 中央に配置 left:0を左記２行に書き換えると真ん中から線がでるでざいんになる */
+    /* transform: translateX(-50%); 自分の幅の半分だけ左に戻して完璧に中央へ */
+    width: 0;
+    /* 最初の幅が0 */
+    height: 2px;
+    background-color: #222222;
+    transition: width 0.3s ease;
+    /* 幅が変わるときにアニメーションする */
+}
+
+.header-nav a:hover::after {
+    width: 100%;
+    /* ホバーしたときに100%になる */
+}

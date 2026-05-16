@@ -1,0 +1,33 @@
+* {
+    margin: 0;
+    padding: 0;/* 全要素の余白をゼロにする */
+    box-sizing: border-box;
+    /* paddingやborderを含めてwidthを計算する */
+/* これがないとwidthの計算がズレてレイアウトが崩れる */
+}
+
+
+img {
+    max-width: 100%;/* 画像が親要素からはみ出さないようにする */
+    vertical-align: bottom;
+}
+
+a {
+    text-decoration: none;/* リンクの下線を消す */
+    color: inherit;
+}
+
+ul {
+    list-style: none;/* リストの「・」を消す */
+}
+
+body {
+    font-family: sans-serif;
+    color: #222222;/* 仕様書に載っていた色 */
+}
+
+/* ■仕様書のカラーガイド */
+/* 黒・・・#222222 */
+/* 黄色・・・#ffd61a */
+/* グレー背景・・・#fafafa */
+/* フッター背景・・・#707070 */
